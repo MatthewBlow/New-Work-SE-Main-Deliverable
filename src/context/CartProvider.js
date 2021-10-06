@@ -27,24 +27,24 @@ const cartReducer = (/*A*/ state, /*B*/ action) => {
   if (action.type === "ADD") {
     const updatedTotalAmount =
       state.totalAmount + action.item.price * action.item.amount;
-      /*C*/ const existingCartItemIndex = state.items.findIndex(
+    /*C*/ const existingCartItemIndex = state.items.findIndex(
       (item) => item.id === action.item.id
     );
     // Const to hold value of cart item at specific index
     const existingCartItem = state.items[existingCartItemIndex];
     let updatedItems;
-    
+
     // IF statement for checking if an item already exists within the cart
-    if(existingCartItem){
+    if (existingCartItem) {
       //Set new item equal to the existing item and update amount values
       const updatedItem = {
         ...existingCartItem,
-        amount: existingCartItem.amount + action.item.amount
+        amount: existingCartItem.amount + action.item.amount,
       };
-      // Add all state.items to a list 
+      // Add all state.items to a list
       updatedItems = [...state.items];
-      // Update item at specific index (existingCartItemIndex) with the updatedItem object 
-      updatedItems[existingCartItemIndex] = updatedItem
+      // Update item at specific index (existingCartItemIndex) with the updatedItem object
+      updatedItems[existingCartItemIndex] = updatedItem;
     } else {
       //If item does not exist in the cart index then simply add it to the cart
       updatedItems = /*D*/ state.items.concat(action.item);
@@ -57,35 +57,38 @@ const cartReducer = (/*A*/ state, /*B*/ action) => {
     };
   }
 
-  if(action.type === 'REMOVE'){
+  if (action.type === "REMOVE") {
     // Const to hold index of the item were trying to add to the cart
     const existingCartItemIndex = state.items.findIndex(
       (item) => item.id === action.id
-    ); 
+    );
     // Const to hold value of cart item at specific index
     const existingItem = state.items[existingCartItemIndex];
     // Const to hold value of removing the existing items price from the total amount
     const updatedTotalAmount = state.totalAmount - existingItem.price;
-    
+
     let updatedItems;
-    
-    if(existingItem.amount === 1){
+
+    if (existingItem.amount === 1) {
       // Using .filter to return a new array of items without the specified item (action.id)
-      updatedItems = state.items.filter(item => item.id !== action.id)
+      updatedItems = state.items.filter((item) => item.id !== action.id);
     } else {
       // Updated item is equal to previous item but with new amount
-      const updatedItem = {...existingItem, amount: existingItem.amount - 1}
-      // Add all state.items to a list 
-      // Update item at specific index (existingCartItemIndex) with the updatedItem object 
+      const updatedItem = { ...existingItem, amount: existingItem.amount - 1 };
+      // Add all state.items to a list
+      // Update item at specific index (existingCartItemIndex) with the updatedItem object
       updatedItems = [...state.items];
-      updatedItems[existingCartItemIndex] = updatedItem
+      updatedItems[existingCartItemIndex] = updatedItem;
     }
-    
+
     // Return updated information for the Cart Context
-    return{
+    return {
       items: updatedItems,
-      totalAmount: updatedTotalAmount
-    }
+      totalAmount: updatedTotalAmount,
+    };
+  }
+  if (action.type === "CLEAR") {
+    return defaultCartState;
   }
   //Cart object is then returned
   return defaultCartState;
@@ -112,12 +115,17 @@ const CartProvider = (props) => {
     dispatchCartAction({ type: "REMOVE", id: id });
   };
 
+  const clearCartHandler = () => {
+    dispatchCartAction({type: "CLEAR"});
+  };
+
   // Adding the cart objects dynamically with the cartState
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
     addItem: addItemToCartHandler,
     removeItem: removeItemFromCartHandler,
+    clearCart: clearCartHandler
   };
 
   // CartConext (cart-context.js) used to provide auto complection logic

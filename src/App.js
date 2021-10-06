@@ -5,7 +5,7 @@ import Meals from "./components/Meals/Meals";
 import CartProvider from "./context/CartProvider";
 
 function App() {
-
+  
   const[cartIsShown, setCartIsShown] = useState(false);
 
   const showCartHandler = () => {
@@ -21,7 +21,7 @@ function App() {
       {cartIsShown && <Cart onClose={hideCartHandler}/>}
       <Header onShowCart={showCartHandler}/>
       <main>
-      <Meals/>
+      <Meals />
       </main>
     </CartProvider>
   );
