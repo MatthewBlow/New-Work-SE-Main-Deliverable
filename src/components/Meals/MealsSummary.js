@@ -3,13 +3,13 @@ import classes from './MealsSummary.module.css'
 const MealsSummary = () => {
   return (
   <section className={classes.summary}>
-      <h2>Delicious Food, Delivered To You</h2>
+      <h2>Delicious Food, Delivered To Your Door!</h2>
       <p>
-        Come get some tasty food
+        Choose from our selection of foods from all over the world, all from the comfort of your home!
       </p>
-      <p>
+      <h1>
         Order Now!
-      </p>
+      </h1>
   </section>
   )
 }

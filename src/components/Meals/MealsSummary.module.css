@@ -5,14 +5,24 @@
     margin: auto;
     margin-top: -10rem;
     position: relative;
-    background-color: #383838;
+    background-color: #c54734;
     color: white;
     border-radius: 14px;
     padding: 1rem;
-    box-shadow: 0 1px 38px 10px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 38px 10px rgba(0, 0, 0, 0.63);
   }
   
   .summary h2 {
     font-size: 2rem;
+    font-family: 'Fredoka One';
     margin-top: 0;
+  }
+
+  .summary p{
+    font-family: 'Fredoka One';
+  }
+
+  .summary h1{
+    font-family: 'Fredoka One';
+    text-decoration: underline;
   }
