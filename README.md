@@ -9,6 +9,8 @@ The project is built with functional components and makes use of React Hooks as 
   
   https://orderway.glitch.me/
   
+  The app goes inactive after not being used for a while, so let it load for a bit while it becomes active again.
+  
 ## Usage
 
 Simply select the foods you want to eat as well as the amount per item and add it to your cart by clicking "Add". Once in the cart, confirm your cart items by clicking "Order". 
